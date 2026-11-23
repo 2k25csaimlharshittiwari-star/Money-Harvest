@@ -1,17 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
-    <meta name="theme-color" content="#FEFAE0" />
-    <title>Money Harvest — Grow Your Financial Intelligence</title>
-    <meta name="description" content="Learn smarter money management, detect scams, use financial calculators, and build lasting financial confidence with Money Harvest's education platform." />
-    <meta name="author" content="Money Harvest" />
-    <meta name="keywords" content="financial literacy,money education,scam detector,SIP calculator,cybersecurity,personal finance" />
-    <link rel="icon" type="image/svg+xml" href="/logo.svg" />
-  </head>
-  <body class="bg-[#FEFAE0] text-[#2F3625] antialiased select-none-text">
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+      document.getElementById('sip-val-text').innerText = '₹' + p.toLocaleString('en-IN');
+      document.getElementById('sip-rate-text').innerText = r + '%';
+      document.getElementById('sip-years-text').innerText = y + ' Years';
+      const i = r / 100 / 12;
+      const n = y * 12;
+      const maturity = p * ((Math.pow(1 + i, n) - 1) / i) * (1 + i);
+      const invested = p * n;
+      const gains = maturity - invested;
+      document.getElementById('sip-invested').innerText = '₹' + Math.round(invested).toLocaleString('en-IN');
+      document.getElementById('sip-gains').innerText = '+₹' + Math.round(gains).toLocaleString('en-IN');
+      document.getElementById('sip-total').innerText = '₹' + Math.round(maturity).toLocaleString('en-IN');
+    }
+    // AI chat logic
+    function sendAiMsg() {
+      const inp = document.getElementById('ai-input');
+      const text = inp.value.trim();
+      if (!text) return;
+      const stream = document.getElementById('chat-stream');
+      stream.innerHTML += `<div class="p-3 bg-[#8F6B44] text-white rounded-xl text-xs ml-auto max-w-[85%]">${text}</div>`;
+      inp.value = '';
+      setTimeout(() => {
+        let reply = "Personal finance is about two things: growing wealth with disciplined monthly SIPs and defending it against fraud. Explore our Scam Detector or Calculators to see real numbers!";
+        const q = text.toLowerCase();
+        if (q.includes('fd') || q.includes('sip')) {
+          reply = "FD offers fixed guaranteed returns (~6.5-7%) suitable for emergencies. SIP mutual funds fluctuate short term but historically compound at ~12-14% over 10+ years, beating inflation.";
+        } else if (q.includes('digital arrest')) {
+          reply = "⚠️ Warning: 'Digital Arrest' is 100% fake. Police/CBI never hold online court or video arrests. Dial 1930 immediately.";
+        }
+        stream.innerHTML += `<div class="p-3 bg-[#FEFAE0] rounded-xl border border-[#E3DEC4] text-xs leading-relaxed max-w-[85%]">🌿 <strong>Harvest AI:</strong> ${reply}</div>`;
+        stream.scrollTop = stream.scrollHeight;
+      }, 500);
+    }
+    lucide.createIcons();
+    updateSIP();
+  </script>
+</body>
 </html>
