@@ -1,0 +1,9 @@
+{
+  "appId": "ai.spacez.moneyharvest",
+  "appName": "Money Harvest",
+  "webDir": "dist",
+  "bundledWebRuntime": false,
+  "server": {
+    "androidScheme": "https"
+  }
+}
